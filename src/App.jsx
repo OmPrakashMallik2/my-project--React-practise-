@@ -1,10 +1,10 @@
 import React from "react";
-import FoodComponent from "./FoodComponent";
+import TodoApp from "./TodoApp";
 
 function App() {
   return (
     <div>
-      <FoodComponent />
+      <TodoApp />
     </div>
   );
 }

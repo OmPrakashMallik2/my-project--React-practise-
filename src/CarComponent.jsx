@@ -1,50 +1,91 @@
 import React, { useState } from "react";
 
 function CarComponent() {
-  const [car, setCar] = useState({
-    brand: "Mahindra",
-    model: "XUV 700",
-    year: "2023",
-  });
+  const [cars, setCars] = useState([]);
+
+  const [year, setYear] = useState(new Date().getFullYear());
+  const [brand, setBrand] = useState("");
+  const [model, setModel] = useState("");
 
   const handleBrandChange = (event) => {
-    setCar((c) => ({ ...car, brand: event.target.value }));
+    setBrand(event.target.value);
   };
+
   const handleModelChange = (event) => {
-    setCar({ ...car, model: event.target.value });
+    setModel(event.target.value);
   };
+
   const handleYearChange = (event) => {
-    setCar({ ...car, year: event.target.value });
+    setYear(event.target.value);
   };
+
+  const addCarHandler = (event) => {
+    event.preventDefault();
+    const newCar = {
+      brand: brand,
+      model: model,
+      year: year,
+    };
+
+    setCars([...cars, newCar]);
+    setBrand("");
+    setModel("");
+    setYear(new Date().getFullYear());
+  };
+
+  const removeCarHandler = (index) => {
+    setCars(cars.filter((elem, i) => i !== index));
+  };
+
   return (
     <div className="m-5 p-5">
-      <h1 className="text-3xl font-bold text-neutral-900 py-3">
-        {car.brand} {car.model} {car.year} is a good car.
-      </h1>
+      <h1 className="text-2xl font-bold">List of car: </h1>
+      <ul className="p-5">
+        {cars.map((car, index) => (
+          <li key={index} className="text-xl font-semibold p-1">
+            {index + 1}. {car.brand} {car.model} {car.year}
+            <button
+              onClick={() => removeCarHandler(index)}
+              className="text-red-500 ml-3"
+            >
+              remove
+            </button>
+          </li>
+        ))}
+      </ul>
 
-      <div className="flex flex-col gap-5">
+      <form onSubmit={addCarHandler} className="flex justify-between">
         <input
           type="text"
-          value={car.brand}
+          value={brand}
           onChange={handleBrandChange}
           placeholder="Brand"
-          className="text-2xl font-semibold text-neutral-700 p-3 bg-slate-200 w-60 rounded"
+          required
+          className="text-xl font-semibold text-neutral-800 p-2 bg-neutral-100 w-60 rounded"
         />
         <input
           type="text"
-          value={car.model}
+          value={model}
           onChange={handleModelChange}
           placeholder="Model"
-          className="text-2xl font-semibold text-neutral-700 p-3 bg-slate-200 w-60 rounded"
+          required
+          className="text-xl font-semibold text-neutral-800 p-2 bg-neutral-100 w-60 rounded"
         />
         <input
           type="text"
-          value={car.year}
+          value={year}
           onChange={handleYearChange}
           placeholder="Year"
-          className="text-2xl font-semibold text-neutral-700 p-3 bg-slate-200 w-60 rounded"
+          required
+          className="text-xl font-semibold text-neutral-800 p-2 bg-neutral-100 w-60 rounded"
         />
-      </div>
+        <button
+          type="submit"
+          className="text-xl font-semibold text-white p-2 bg-blue-500 w-40 rounded"
+        >
+          Add car
+        </button>
+      </form>
     </div>
   );
 }
