@@ -1,10 +1,10 @@
 import React from "react";
-import TodoApp from "./TodoApp";
+import DigitalClock from "./DigitalClock";
 
 function App() {
   return (
-    <div>
-      <TodoApp />
+    <div className="bg-neutral-700 text-neutral-200 h-screen">
+      <DigitalClock />
     </div>
   );
 }
