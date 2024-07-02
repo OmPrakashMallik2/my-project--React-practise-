@@ -11,16 +11,17 @@ function DigitalClock() {
     return () => {
       clearInterval(interval);
     };
-  });
+  }, []);
 
   function showTime() {
-    const ss = time.getSeconds();
+    let hh = time.getHours();
     const mm = time.getMinutes();
-    const hh = time.getHours();
-    
+    const ss = time.getSeconds();
+
     if (hh > 12) {
       hh = hh % 12;
     }
+
     const am_pm = hh < 12 ? "AM" : "PM";
     return `${addZero(hh)}:${addZero(mm)}:${addZero(ss)} ${am_pm}`;
   }

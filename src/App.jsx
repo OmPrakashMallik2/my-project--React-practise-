@@ -1,10 +1,10 @@
 import React from "react";
-import DigitalClock from "./DigitalClock";
+import Component1 from "./usecontexthook/Component1";
 
 function App() {
   return (
-    <div className="bg-neutral-700 text-neutral-200 h-screen">
-      <DigitalClock />
+    <div className="text-2xl font-semibold">
+      <Component1 />
     </div>
   );
 }
